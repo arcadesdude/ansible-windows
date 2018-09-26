@@ -3,8 +3,7 @@ This repo contains the following script
 
 ## Upgrade-PowerShell.ps1
 The `Upgrade-PowerShell.ps1` script is used to upgrade the installed version of
-PowerShell on a Windows host to a newer version. Ansible requires at least
-version `3.0` to be install but some modules may require a newer version.
+PowerShell on a Windows host to a newer version.
 
 jborean did an excellent job with this script :D
 
