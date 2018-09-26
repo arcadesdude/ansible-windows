@@ -1,16 +1,19 @@
 # PSScriptInfo
-# .VERSION 1.0
+# .VERSION 1.0001 
 # .GUID 23743bae-7604-459d-82c5-a23d36b0820e
 # .AUTHOR
-#     Jordan Borean <jborean93@gmail.com>
+#     Jordan Borean <jborean93@gmail.com> (author)
+#     Ricky Cobb <rcobb3@gmail.com> (minor changes)
 # .COPYRIGHT
 #     Jordan Borean 2017
 # .TAGS
-#     PowerShell,Ansible
+#     PowerShell,Upgrade
 # .LICENSEURI https://github.com/jborean93/ansible-windows/blob/master/LICENSE
 # .PROJECTURI https://github.com/jborean93/ansible-windows
 # .RELEASENOTES
-#     Version 1.0: 2017-09-27
+#     Version 1.0001: 2018-09-26
+#         Modified for silent operation when credentials are supplied
+#     Version 1.0:    2017-09-27
 #         Initial script created
 # .DESCRIPTION
 # The script will upgrade the powershell version to whatever is supplied as
