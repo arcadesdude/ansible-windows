@@ -1,5 +1,2 @@
-*.retry
-*/.vagrant/*
 *.log
 *.DS_Store
-vagrant/ca_chain.pem
