@@ -129,13 +129,13 @@ Function Reboot-AndResume {
         Set-ItemProperty -Path $reg_winlogon_path -Name DefaultPassword -Value $password
         Write-Log -message "rebooting server to continue powershell upgrade"
     } else {
-        Write-Log -message "need to reboot server to continue powershell upgrade"
-        $reboot_confirmation = Read-Host -Prompt "need to reboot server to continue powershell upgrade, do you wish to proceed (y/n)"
-        if ($reboot_confirmation -ne "y") {
-            $error_msg = "please reboot server manually and login to continue upgrade process, the script will restart on the next login automatically"
-            Write-Log -message $error_msg -level "ERROR"
-            throw $error_msg
-        }
+        Write-Log -message "need to reboot and log back in to continue powershell upgrade but credentials are missing"
+
+        $error_msg = "the script will restart on the next login automatically"
+        Write-Log -message $error_msg -level "ERROR"
+        Restart-Computer -Force
+        #throw $error_msg
+
     }
 
     if (Get-Command -Name Restart-Computer -ErrorAction SilentlyContinue) {
@@ -233,10 +233,16 @@ if ($PSVersionTable -eq $null) {
     Reboot-AndResume
 }
 
-# exit if the target version is the same as the actual version
+# exit if the target version is the same as the actual version or actual version is greater than target version
 $current_ps_version = [version]"$($PSVersionTable.PSVersion.Major).$($PSVersionTable.PSVersion.Minor)"
 if ($current_ps_version -eq [version]$version) {
-    Write-Log -message "current and target PS version are the same, no action is required"
+    Write-Log -message "current and target PS version are the same ($($current_ps_version)), no action is required"
+    Clear-AutoLogon
+    exit 0
+}
+
+if ($([int][string]$current_ps_version) -gt $([int]$version)) {
+    Write-Log -message "current version $($current_ps_version) is higher than target PS version $([version]$version), no action is required"
     Clear-AutoLogon
     exit 0
 }
